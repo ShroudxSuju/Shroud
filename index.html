@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.S. Enterprises – Precision Moulds, Dies, Jigs & Fixtures</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --steel: #1a1f2e;
+    --steel-mid: #242b3d;
+    --steel-light: #2e3850;
+    --teal: #00b4c8;
+    --teal-dark: #008fa0;
+    --teal-glow: rgba(0,180,200,0.15);
+    --gold: #e8a020;
+    --white: #f0f4f8;
+    --muted: #8899aa;
+    --spark: #ff6a00;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--steel);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 4rem;
+    background: rgba(26,31,46,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,180,200,0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+  }
+  .nav-logo span { color: var(--teal); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* diagonal split background */
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(125deg, var(--steel) 55%, var(--steel-mid) 55%);
+  }
+  #hero::after {
+    content: '';
+    position: absolute;
+    top: -30%; right: -10%; width: 60%; height: 140%;
+    background: radial-gradient(ellipse at center, rgba(0,180,200,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* grid lines */
+  .hero-grid-lines {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(0,180,200,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,180,200,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-text { position: relative; z-index: 2; }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block; width: 32px; height: 1px;
+    background: var(--teal);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 7vw, 7rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  h1 .accent { color: var(--teal); }
+  h1 .gold { color: var(--gold); }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    padding: 0.9rem 2.2rem;
+    background: var(--teal);
+    color: var(--steel);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: background 0.25s, transform 0.2s;
+  }
+  .hero-cta:hover { background: var(--teal-dark); transform: translateY(-2px); }
+  .hero-cta svg { width: 16px; height: 16px; }
+
+  .hero-image-wrap {
+    position: relative; z-index: 2;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .hero-image-wrap img {
+    width: 100%; max-width: 580px;
+    filter: drop-shadow(0 0 40px rgba(0,180,200,0.25));
+    animation: floatMachine 5s ease-in-out infinite;
+  }
+
+  @keyframes floatMachine {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  /* spark effect */
+  .spark-badge {
+    position: absolute; top: 12%; right: 8%;
+    background: var(--spark);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    padding: 0.4rem 0.9rem;
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--steel-mid);
+    border-top: 1px solid rgba(0,180,200,0.15);
+    border-bottom: 1px solid rgba(0,180,200,0.15);
+    display: flex; justify-content: space-around; align-items: center;
+    padding: 2rem 4rem;
+    flex-wrap: wrap; gap: 2rem;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--teal);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+  .stat-divider {
+    width: 1px; height: 48px;
+    background: rgba(0,180,200,0.2);
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section { padding: 6rem 4rem; }
+  .section-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .section-rule {
+    width: 48px; height: 3px;
+    background: linear-gradient(90deg, var(--teal), transparent);
+    margin-bottom: 3rem;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--steel); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5px;
+    background: rgba(0,180,200,0.15);
+    border: 1px solid rgba(0,180,200,0.15);
+  }
+  .service-card {
+    background: var(--steel);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--teal);
+    transition: width 0.4s ease;
+  }
+  .service-card:hover::before { width: 100%; }
+  .service-card:hover { background: var(--steel-mid); }
+
+  .service-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .service-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+  }
+  .service-desc {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+  .service-number {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: rgba(0,180,200,0.08);
+    line-height: 1;
+  }
+
+  /* ── MACHINES ── */
+  #machines { background: var(--steel-mid); }
+  .machines-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  .machine-card {
+    background: var(--steel);
+    border: 1px solid rgba(0,180,200,0.15);
+    overflow: hidden;
+    position: relative;
+  }
+  .machine-card img {
+    width: 100%;
+    height: 340px;
+    object-fit: contain;
+    background: #0d1018;
+    padding: 2rem;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .machine-card:hover img { transform: scale(1.04); }
+  .machine-info { padding: 1.8rem 2rem; }
+  .machine-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+  .machine-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .machine-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .machine-specs {
+    margin-top: 1.2rem;
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .spec-chip {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(0,180,200,0.3);
+    color: var(--teal);
+  }
+
+  /* ── TEAM ── */
+  #team { background: var(--steel); }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .team-card {
+    background: var(--steel-mid);
+    border: 1px solid rgba(0,180,200,0.1);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .team-card:hover {
+    border-color: rgba(0,180,200,0.4);
+    transform: translateY(-6px);
+  }
+  .team-card.leader {
+    border-color: rgba(232,160,32,0.3);
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .team-card.leader:hover { border-color: rgba(232,160,32,0.6); }
+
+  .team-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--steel);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .leader .team-avatar {
+    width: 100px; height: 100px;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, #c07010, var(--gold));
+  }
+
+  .team-role {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.4rem;
+  }
+  .leader .team-role { color: var(--gold); }
+
+  .team-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.7rem;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+  }
+  .leader .team-name { font-size: 2.2rem; }
+
+  .team-exp {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+  .exp-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--teal);
+  }
+  .leader .exp-dot { background: var(--gold); }
+
+  .team-bio {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .team-speciality {
+    margin-top: 1rem;
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .spec-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.7rem;
+    background: rgba(0,180,200,0.1);
+    border: 1px solid rgba(0,180,200,0.2);
+    color: var(--teal);
+  }
+
+  /* ── WHY US ── */
+  #why { background: var(--steel-mid); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .why-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .why-features { display: flex; flex-direction: column; gap: 1.2rem; }
+  .why-feature {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--steel);
+    border-left: 3px solid var(--teal);
+  }
+  .why-feature-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .why-feature-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+  }
+  .why-feature-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.55; }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--steel);
+    border-top: 1px solid rgba(0,180,200,0.15);
+  }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contact-info p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .contact-item-icon {
+    width: 40px; height: 40px;
+    background: var(--teal-glow);
+    border: 1px solid rgba(0,180,200,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .contact-item-text {
+    font-size: 0.9rem;
+    color: var(--white);
+  }
+  .contact-item-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.1rem;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: var(--steel-mid);
+    border: 1px solid rgba(0,180,200,0.2);
+    color: var(--white);
+    padding: 0.75rem 1rem;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.25s;
+    width: 100%;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--teal); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-group select option { background: var(--steel-mid); }
+
+  .btn-submit {
+    display: inline-flex; align-items: center; gap: 0.75rem; justify-content: center;
+    padding: 1rem 2.5rem;
+    background: var(--teal);
+    color: var(--steel);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: background 0.25s, transform 0.2s;
+    width: 100%;
+  }
+  .btn-submit:hover { background: var(--teal-dark); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0f1320;
+    border-top: 1px solid rgba(0,180,200,0.1);
+    padding: 2rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.06em;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--teal); }
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .footer-tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; text-align: center; }
+    .hero-eyebrow { justify-content: center; }
+    .hero-sub { margin-inline: auto; }
+    .hero-image-wrap { margin-top: 2rem; }
+    .machines-grid, .team-grid, .why-grid, .contact-inner { grid-template-columns: 1fr; }
+    .team-card.leader { grid-template-columns: 1fr; text-align: center; }
+    .team-card.leader .team-avatar { margin-inline: auto; }
+    .section { padding: 4rem 1.5rem; }
+    .stats-bar { padding: 1.5rem; }
+    .stat-divider { display: none; }
+    footer { flex-direction: column; align-items: flex-start; padding: 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  /* ── TRUSTED CLIENTS ── */
+  .clients-section { background: var(--steel-mid); }
+  .clients-intro {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 620px;
+    margin-bottom: 3rem;
+  }
+  .clients-intro strong { color: var(--teal); font-weight: 600; }
+
+  .clients-slider-wrap {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+  .clients-track { position: relative; min-height: 320px; }
+
+  .client-slide {
+    display: none;
+    animation: fadeSlide 0.5s ease;
+  }
+  .client-slide.active { display: block; }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .client-card {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 3rem;
+    align-items: center;
+    background: var(--steel);
+    border: 1px solid rgba(0,180,200,0.18);
+    padding: 2.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .client-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--teal), var(--gold));
+  }
+
+  .client-logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    aspect-ratio: 1;
+  }
+  .client-logo {
+    max-width: 140px;
+    max-height: 140px;
+    object-fit: contain;
+    display: block;
+  }
+  .cim-logo { background: transparent; }
+
+  .client-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .client-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--white);
+    letter-spacing: 0.03em;
+    margin-bottom: 1rem;
+  }
+  .client-desc {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 1.4rem;
+  }
+  .client-pillars { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .client-pillar {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.9rem;
+    background: rgba(0,180,200,0.08);
+    border: 1px solid rgba(0,180,200,0.25);
+    color: var(--teal);
+  }
+
+  /* Dots */
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,180,200,0.4);
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+    padding: 0;
+  }
+  .dot.active { background: var(--teal); border-color: var(--teal); }
+
+  /* Arrows */
+  .slider-arrow {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    background: var(--steel-mid);
+    border: 1px solid rgba(0,180,200,0.25);
+    color: var(--teal);
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.25s, border-color 0.25s;
+    z-index: 5;
+  }
+  .slider-arrow:hover { background: var(--steel-light); border-color: var(--teal); }
+  .slider-arrow.prev { left: -56px; }
+  .slider-arrow.next { right: -56px; }
+
+  /* Trust strip */
+  .trust-strip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    background: var(--steel);
+    border: 1px solid rgba(0,180,200,0.12);
+    padding: 1.4rem 2rem;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0 2rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .trust-icon { font-size: 1.1rem; }
+  .trust-divider {
+    width: 1px; height: 30px;
+    background: rgba(0,180,200,0.2);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .client-card { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1.5rem; }
+    .client-logo-wrap { max-width: 140px; margin: 0 auto; }
+    .slider-arrow.prev { left: 0; top: auto; bottom: -54px; transform: none; }
+    .slider-arrow.next { right: 0; top: auto; bottom: -54px; transform: none; }
+    .trust-item { padding: 0.5rem 1rem; }
+    .trust-divider { display: none; }
+    .clients-slider-wrap { padding-bottom: 4rem; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">S.S.<span>Enterprises</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#machines">Machines</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#clients">Clients</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-lines"></div>
+  <div class="hero-text">
+    <div class="hero-eyebrow">Precision Engineering Since 1994</div>
+    <h1>
+      MOULDING<br>
+      <span class="accent">PRECISION.</span><br>
+      <span class="gold">CRAFTING</span> QUALITY.
+    </h1>
+    <p class="hero-sub">
+      S.S. Enterprises specialises in the design and manufacture of all kinds of moulds, dies, jigs & fixtures — powered by decades of expertise and cutting-edge EDM technology.
+    </p>
+    <a href="#contact" class="hero-cta">
+      Get a Quote
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 8h10M9 4l4 4-4 4"/>
+      </svg>
+    </a>
+  </div>
+  <div class="hero-image-wrap">
+    <span class="spark-badge">⚡ EDM Specialists</span>
+    <img src="ezeecut-h-nxg-3545-with-pannel-2-1.png" alt="Ratnaparkhi EZEECUT H NXG 3545 Wire EDM Machine">
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-number">30+</div>
+    <div class="stat-label">Years of Experience</div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat">
+    <div class="stat-number">500+</div>
+    <div class="stat-label">Projects Completed</div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat">
+    <div class="stat-number">100%</div>
+    <div class="stat-label">Quality Commitment</div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat">
+    <div class="stat-number">3</div>
+    <div class="stat-label">Expert Specialists</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="section">
+  <div class="section-eyebrow">What We Do</div>
+  <h2 class="section-title">OUR SERVICES</h2>
+  <div class="section-rule"></div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <span class="service-icon">🔷</span>
+      <span class="service-number">01</span>
+      <div class="service-name">Moulds</div>
+      <p class="service-desc">Design and manufacture of precision moulds for plastic injection, compression, blow moulding and more — built to exact tolerances for high-volume production runs.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">⚙️</span>
+      <span class="service-number">02</span>
+      <div class="service-name">Dies</div>
+      <p class="service-desc">Progressive, compound and blanking dies crafted for sheet metal forming operations. Designed for repeatability, durability, and consistent performance on the shop floor.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">🔩</span>
+      <span class="service-number">03</span>
+      <div class="service-name">Jigs</div>
+      <p class="service-desc">Custom drilling, welding and assembly jigs engineered to guide tools and workpieces with precision — eliminating errors and speeding up production cycles.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">📐</span>
+      <span class="service-number">04</span>
+      <div class="service-name">Fixtures</div>
+      <p class="service-desc">Robust machining and inspection fixtures that securely locate and hold components during manufacturing — ensuring dimensional accuracy and part-to-part consistency.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">⚡</span>
+      <span class="service-number">05</span>
+      <div class="service-name">Spark EDM</div>
+      <p class="service-desc">Sparkonix EDM sinker operations for intricate cavities, deep holes, and complex geometries that conventional machining cannot achieve.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">🪢</span>
+      <span class="service-number">06</span>
+      <div class="service-name">Wire EDM</div>
+      <p class="service-desc">High-precision CNC wire-cut EDM job work for punch-die sets, intricate profiles, and exotic materials — with tight tolerances on every pass.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MACHINES -->
+<section id="machines" class="section">
+  <div class="section-eyebrow">Our Equipment</div>
+  <h2 class="section-title">MACHINES IN OPERATION</h2>
+  <div class="section-rule"></div>
+  <div class="machines-grid">
+    <div class="machine-card fade-up">
+      <img src="ezeecut-h-nxg-3545-with-pannel-2-1.png" alt="Ratnaparkhi EZEECUT H NXG 3545">
+      <div class="machine-info">
+        <div class="machine-tag">Wire EDM</div>
+        <div class="machine-name">EZEECUT H NXG 3545</div>
+        <p class="machine-desc">Ratnaparkhi's flagship CNC wire-cut EDM with NXG controller. Delivers ultra-fine surface finishes, auto wire threading, and sub-micron positional accuracy for demanding tool room requirements.</p>
+        <div class="machine-specs">
+          <span class="spec-chip">CNC Wire Cut</span>
+          <span class="spec-chip">NXG Controller</span>
+          <span class="spec-chip">Auto Threading</span>
+        </div>
+      </div>
+    </div>
+    <div class="machine-card fade-up">
+      <img src="images.jpg" alt="Sparkonix EDM Sinker Machine">
+      <div class="machine-info">
+        <div class="machine-tag">Spark EDM</div>
+        <div class="machine-name">SPARKONIX EDM SINKER</div>
+        <p class="machine-desc">Industry-proven Sparkonix die-sinker EDM for producing complex cavities, pockets, and intricate electrode impressions in hardened steels and exotic alloys — with high material removal rates and superior surface quality.</p>
+        <div class="machine-specs">
+          <span class="spec-chip">Die Sinker</span>
+          <span class="spec-chip">Hardened Steel</span>
+          <span class="spec-chip">Complex Cavities</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="section">
+  <div class="section-eyebrow">The People Behind the Precision</div>
+  <h2 class="section-title">MEET THE TEAM</h2>
+  <div class="section-rule"></div>
+  <div class="team-grid">
+
+    <!-- OWNER -->
+    <div class="team-card leader fade-up">
+      <div class="team-avatar">DJ</div>
+      <div>
+        <div class="team-role">Founder & Owner</div>
+        <div class="team-name">Devaraj J Gouder</div>
+        <div class="team-exp"><span class="exp-dot"></span> 30 Years of Industry Experience</div>
+        <p class="team-bio">
+          With three decades at the heart of precision tool manufacturing, Devaraj J Gouder has built S.S. Enterprises into a trusted name in the industry. His deep expertise spans the complete spectrum of moulds, dies, jigs & fixtures — guiding every project from initial design through final delivery with an unwavering commitment to quality and on-time performance.
+        </p>
+        <div class="team-speciality">
+          <span class="spec-tag">Mould Design</span>
+          <span class="spec-tag">Die Manufacturing</span>
+          <span class="spec-tag">Jigs & Fixtures</span>
+          <span class="spec-tag">Production Management</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUNIL -->
+    <div class="team-card fade-up">
+      <div class="team-avatar">SG</div>
+      <div class="team-role">EDM Sinker Specialist</div>
+      <div class="team-name">Sunil Gouder</div>
+      <div class="team-exp"><span class="exp-dot"></span> 8 Years of Industry Experience</div>
+      <p class="team-bio">
+        A certified tool designer and manufacturer with specialist expertise on the Sparkonix EDM sinker machine. Sunil handles complex cavity work, electrode design, and intricate die-sinking operations — combining technical precision with a thorough grounding in tool engineering principles.
+      </p>
+      <div class="team-speciality">
+        <span class="spec-tag">Sparkonix EDM</span>
+        <span class="spec-tag">Tool Design</span>
+        <span class="spec-tag">Die Sinking</span>
+      </div>
+    </div>
+
+    <!-- SUSHIL -->
+    <div class="team-card fade-up">
+      <div class="team-avatar">SH</div>
+      <div class="team-role">Wire EDM Specialist</div>
+      <div class="team-name">Sushil Gouder</div>
+      <div class="team-exp"><span class="exp-dot"></span> 8 Years of Industry Experience</div>
+      <p class="team-bio">
+        Specialising in CNC EDM wire-cutting job work, Sushil brings exceptional accuracy to every profile and punch-die set. With 8 years of hands-on experience operating wire EDM equipment, he delivers tight tolerances on complex geometries and exotic materials, meeting the most demanding client specifications.
+      </p>
+      <div class="team-speciality">
+        <span class="spec-tag">Wire EDM</span>
+        <span class="spec-tag">CNC Operations</span>
+        <span class="spec-tag">Punch-Die Sets</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why" class="section">
+  <div class="section-eyebrow">Our Advantage</div>
+  <h2 class="section-title">WHY CHOOSE US</h2>
+  <div class="section-rule"></div>
+  <div class="why-grid">
+    <div class="why-text fade-up">
+      <p>
+        At S.S. Enterprises, we bring together generations of tool-making knowledge and modern EDM technology under one roof. Whether you need a single prototype or a full production toolset, our team delivers with precision that speaks for itself.
+      </p>
+      <p>
+        Our integrated approach — from design to delivery — ensures every mould, die, jig or fixture meets your exact specifications, on time and within budget. We work across industries including automotive, plastics, sheet metal, and general engineering.
+      </p>
+    </div>
+    <div class="why-features fade-up">
+      <div class="why-feature">
+        <span class="why-feature-icon">🎯</span>
+        <div>
+          <div class="why-feature-title">End-to-End Expertise</div>
+          <p class="why-feature-desc">From CAD design to finished tooling — complete in-house capability eliminates hand-offs and errors.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <span class="why-feature-icon">⚡</span>
+        <div>
+          <div class="why-feature-title">Advanced EDM Technology</div>
+          <p class="why-feature-desc">Both wire-cut and sinker EDM capabilities let us tackle geometries no conventional machining can match.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <span class="why-feature-icon">🔬</span>
+        <div>
+          <div class="why-feature-title">Tight Tolerances</div>
+          <p class="why-feature-desc">Sub-micron precision on critical dimensions, backed by thorough inspection at every stage.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <span class="why-feature-icon">🤝</span>
+        <div>
+          <div class="why-feature-title">30 Years of Trust</div>
+          <p class="why-feature-desc">Decades of consistent delivery have earned us long-standing relationships with clients across industries.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- TRUSTED CLIENTS -->
+<section id="clients" class="section clients-section">
+  <div class="section-eyebrow">Loyal Partners</div>
+  <h2 class="section-title">TRUSTED BY INDUSTRY LEADERS</h2>
+  <div class="section-rule"></div>
+  <p class="clients-intro fade-up">
+    Delivering uncompromising quality and service for over <strong>20+ years</strong> — the relationships we've built are a testament to the precision we bring to every project.
+  </p>
+
+  <div class="clients-slider-wrap fade-up">
+    <div class="clients-track" id="clientsTrack">
+
+      <!-- TARATEC -->
+      <div class="client-slide active" data-index="0">
+        <div class="client-card">
+          <div class="client-logo-wrap">
+            <img src="data:image/png;base64,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" alt="Taratec logo" class="client-logo">
+          </div>
+          <div class="client-body">
+            <div class="client-badge">Loyal Partner · 20+ Years</div>
+            <div class="client-name">Taratec</div>
+            <p class="client-desc">
+              A long-standing partnership built on precision and dependability. Taratec has trusted S.S. Enterprises for over two decades for their critical tooling needs — from complex mould fabrication to tight-tolerance die sets. Their continued confidence is the highest endorsement of our quality and on-time delivery.
+            </p>
+            <div class="client-pillars">
+              <span class="client-pillar">🔁 Repeat Partner</span>
+              <span class="client-pillar">🎯 Zero Defect Delivery</span>
+              <span class="client-pillar">📅 20+ Years</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CIM TOOLS -->
+      <div class="client-slide" data-index="1">
+        <div class="client-card">
+          <div class="client-logo-wrap">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wgARCADIAMgDASIAAhEBAxEB/8QAHAAAAAcBAQAAAAAAAAAAAAAAAAECAwQFBgcI/8QAGwEBAAEFAQAAAAAAAAAAAAAAAAUBAgMEBgf/2gAMAwEAAhADEAAAAfQ9RcVI+8h4YfbeEtvoHScIbSnFaG7uS5fuNfZu0PIl4kQ50UWSwNBQIRmZYgwCrtqsfebfGXkPCUuZfX2NRj8hX8l1MqKxBgeml3Wd6fM6O1Q8jufNiiyoNt0kllfa0FkQjNROBgOttK0feafGkPV+PLzarpZfm3qM+DMPUrT7QdW6mCjzHaXqOMtszjqDmOksocZrm+m32z8+3nUQvaUuJ6riIgUCaDAqusa8ffZfEBT1K8kxXpKjgOr4VNeqeX7G6nZudq4djmCOmqiEm62NmitLWowWwH6+w3M/eUrL0XyWIYOtJgMB19hAH32XgnmnRR5utj9/H5LU5jkPQ1MXe7w28+cdgaOZvqfIXZTHd18qriszNjXWMhl72lafQ/I4pkdaTAAHBnwR95l4FfYwsWXhUusR5v6s+2k6ZbbvfBevzHIYbGbLGxc1BC5tJaPGC6lTGncmHviVF6L5LFMjrSWABUGdAJDzD4TzLpX8u7GNCU81q7tyzmezrn6ORByttAkxsOOLq8p6H6CK88z93or8XG9N0yfJRaUmXRcrGMjJYADgToBIfjvgdYdFmgx8JBkeXegG4qd8/tdSwHHdZRejef8AQes5lbD0aa5xxJpCSZEcEZMBAOvn1xJeYdA6w6OEkiQaBQskkOJIhxATUuM/GodIiqCQRHUgycCAK2xrCU6w8E4y7RiLnK7yMncbd0umx5qOmkt6u50nDbrKykHFvKXN6kj0qBlivwz9JgbWy/bECmeejqbWTgQCrLKsJLsPm+nI9SdwF5Wl5FzVxS62TGavxW8KgnW5L+O/zVTo8WdkK26qLTlbfcP5grMuuKnGzpTl8+3+O+xCRtaaauzqR/B7s9OQqF2jlaYgtseDZzNbvhVz5jozdt8jnHRYufVjZfbptycyPp0TW3ce7snMmDnyOgLo5/vYkrZ1LEJG3HlUAEh4AbeACaAJJgCEgCkgDqAByGAPgASACI4AWIAP/8QALBAAAQMDAwQBAwUBAQAAAAAAAgEDBAAFMxAxMgYREkE0FBUhExYiJTVCI//aAAgBAQABBQKV8hjMtJs/xTZOYp+KLkXGg5f9psNLu3yHZNTyJUXPKzs5lpNn+KbJzHai3kPNsBMvylUa6yIzkG6tTTShpd2+SbJS6HlTaLnlZ2s1enuKUnIaMhbGdfxFX5DkkqN9Erp4lK60Ne2+SbJS6HlTaLmk52sujvFK2KXe2o9SpzswqN5Bo3FOmI7kk7LYShO0lGqAkd4H6TZKWvR5PUbNJztZaSndpD300aVd3Z+rynSIpLbemXZNQ4TMIf8ArZJl7Zi1MuD01WnjYOH1KCU04LorS0WRNo2aRnay0lObXT/MRe1A/SL30tEpiC4w+3IBN5t0YhVOvL8zQiQacQiTsve0y3Y8ulosnqPmkZm8mjmzrIvs3Dph5iiRRVCUaB/vpFmOxDk9QSHwVfJVVBQ5FNp5nT5dyt3zl0LJUfLIzN5KSnNkpN51nj3EbnAW2y6E1CgeQtXWyq22J+4rcYrMF5V7Iq91t3zl0PnUfLIzN5ND2Sk3Suqv9YE8iNpQ0ZX/AMiVBQ31WrHehcgOuK87IL8VbvnaFzqPlkZm8mh7JU29sQ1hdSCZdTOC7c2udP8ASoS4zkRyEcjam3FbXenS8jq3fO0LnUfK/mbyUlHtc1UbaEikXvUjm1zqF8TqP/VkbInelTxUHfEKIfFLd85dD51Hyv5m8mh7XBonoDrJsGJKNGfmrXPtVqu7D7XUa97pI2ayPh3SgTyKRvbvnLoXOo+V/M3k0PZKl26PPSf0zJj0oqJCXiQvIdbUZk4sjZrJNt7sJXQ8SiRnHAfTutpsUo3dC50xmfzN5KSj2Sk3SrhZI9wS42CTb9AeUaEvNJGzWUmAkMXLppe1khfRQBt0cXdFoslR8z+ZvJSUeyUm6aL+aufTbEyp1rkW8mU7NyNmsrfCk3TbRaLnUfK/mby0lObJSbpp7WjAXBm9OAdSLbJ/WtnSohSfjQd/Wi0XOo+WRmDLSU5slJyTRd10TdedJXsd021LJ6j5pGZvLo5xSk5Iui7rtQ79/wCXpK9humyalk9R80jM3l0d2TadNem3Ry29o3UJOxY82ORW/pycZJcpLzlybHxS7RThwYMQ37a3eIxLKnNRF+pblxrJN/St0ac3JPQuabRs0nO3l0d2SiT7Z1CcptoOrF7sPGiRLlDcj3q9CjVxCupl/ro6EfS7hJ+3XEcC9QvL7hBabkWaxuvBL0PJUbNJzt5tHeKUbTcimILDKuw2XyKEwtK2KCUFh0mhQKfjtSCZYbYEIMdHH47cmmYzQgMGOIMx22NTyVGzSs7eYxQxtzLLjNrnONWtq9MulbZDDT8a6NyIx3EAVm6NyW7RczmIl5Z7j+agtD+4u/8AG0uMgX7hYJtL2wJzjZK4uXQ/u79yBpw7owEOe6jt2qLnlZ2sxEgjYG2H3r74habH4pben1FbhEjOM3S7yRanWQu0iyr/AFtuWO/EbXtUN4B6iW5NrJsroocQkSwynBW13JwfuThox1GRixebnHBqHcZLb9z9Rc8v5DWZUQqBhsKkiJg22IC2y2DgondQEl8BE/ARoWW0IPyv0zP6gMNDQR2kr6Zmm47Xf6dok8BJXGgcVRFQJltHPUTPL+S1n0e4psPMdC5FslByXKOw6Nch4pqeWomf/8QALhEAAQMCAwcCBgMAAAAAAAAAAQACAwQRBRIhExQgIjFBURAwFSMzQmGhQFJx/9oACAEDAQE/AeGnpJag8g0VThs1Pr1HtQwSTm0YuqXCGs5pdSmRWFm6BYjPDBA5hOp9A1xF7ccQzPAKbTtibaMaIGxWJ4hUQ8kbbDyg2Wof5KpcH+6dNgYG7O2ircGjc0yQm3ECRqFR445lmzi4TCyZoe3oVJCHDK5RQRwC0bbJ8kUDc8hTZROA9vRS6RFHibQ1D2bQNVBpSsUtdHTkCXumlrzdp0KrKJlVHlKibbRT/TcjwxWEgusrXAFqtlbZY1G97GuAWH/Qj/xF1jZWspTeFx/CPFS4hPSnlNx4VJisFVyu0KMfhMGUrE6w0cjD2KnxiNsGePUlVGOOezJE32aPFpqbldqFTV8E/MCsZrIqlzRHrb+NVXjEex6WTjaCJ4GtyoxFt9o37gqJx3kN8lGBtQ52b+1kKNjQCD+f2qqmjdtJO44aalE7HOv0spKKVriALgKSCaLQXstnUWv2ToKiJ+UdlTQGUPfe2UXUYfI1zwVu9UOWxW7zPGh7XW7y+FUUxga0+fWCpEML47auW8/I2R63un4hmc4gaEJtc1sOzyo4g12bl66qmqWwh4cL5tFHVRRsLQ3qvibM2bL3v+lv7bZcvay+Ii7SB06qpqGzNY1o6e//AP/EAC0RAAEDAgUBBwQDAAAAAAAAAAEAAgMEEQUSEyExIBQiIzBBQlEQMmFxMzTw/9oACAECAQE/AemorIaYd8qlxOCq7vB8qaojp25pDZVWMvf3YdllfKczyqCmc6VrmDYfQuaDYnrkOVhIU+eV2ZxTDkPCw6ngqO851z8Jz44G3OwVXjXtp1qSvfqOduqTEnizJN+rlVGFg96JSRZSWOCyvjOZhU08s5vIVBT6pszdVDcsmRQbOb1ur6dkmmXqsPjOIVLFJUg5PROb3y0qmndSklqZd78xUX8g6pBdhUkW+/K9qwSRjHuDiqr+2/8AaJsuFAbvB66ijiqPuCqMPlh3G4To/hN+/dU1GKyN3yOFDhsr3lkmypcJEW8hv5H7VTh8c+42KmoZoJdwsNp3wNJf6+Zt5UHiF+pzdAeLI0nbZOLxFkd7SqkeAT+EJTCBl+LrtLnG3+4UEzgGM6ZpzE4NsmVLHNBJ3TJY388rNEChLE9typpdPK23KeWtLWla0BN7rWjad1qs+VFPqlw+PrLCZJGv9AtDxdT8JlJla254Rpi6TPdCkLbb8KeEyFtjwnwSPcCTwuxPy2v6Lshve/rddkJBF+VBCYy4uPPn/wD/xAA4EAACAQICCAUDAgMJAAAAAAABAgADERASBCAhMUFRcYETIiNSYTIzcpGxBUKSFENTYnOCodHw/9oACAEBAAY/AmjRtQx+uAhixsTg/WCHHtgkaNG1DH64CE1GCiZdHGX/ADmZs+cHeGgH01PbgcH64HHtgkaNG1DH6zMxCgcTMtAZj7jumaoxY4bNsS/LUfrgce2CQxo2oYy0/Uf/AIl6jbOWHM4ZKal25CCtVb1PaMSWNhHKMGF+GBx7YJDDGxqVbXyLmtPqyr7Rj8Sw2wPX9Kny4mZaSBRiQnqP8T1G8vtG6ZqbFT8QJpGw+4TMjBhzGPbBYYY2Ok/6bfth5pswJqUQ1/5+IgamwYfEM8zZn9qwj7dPkMNs2HCmqOQGNiOGPbBIYY2LU2+lhYwto/qpy4wgixE2TbhmptaZVtT5kS52mbTPLqUPyx7YLDDDqnOtn4ON8NEtm2XvrX3wG2Sl7jPApbco8zHiZfCh+WPbBYYYdUw/gJacxgJeWGyOKp9SkP1Ed23sby3PCh+WPbBYYYdQhfUqchMukLkufqG6ZkOZSg2iDBKmjnw6hXcdxhpVRZxBhcalD8se2Cwww46SRv8ADP7TzfrNmAwpfiI/QQYWhH6YL8yh+WPbBYYYca9NdrMhAmWopVhwM2S8GCU82VwLWMfoIIvWX44AQSh+WPbBYYYdQiqgPzxjPSAq0xwB80IItLzl1wuxzGCJ1gzjyncRPiPVVCVGy4i85TrMBTVTfzb8e2Cwww6pm1ctT3LL5fFpe5cOYlxBE6zJUXMsJ0c5h7TvgpsPMdrTxfCXPz1O2Cwww6pxL0/Rq8xuMtVTy+4boIInWDA6vbBYYYdU9dTK4DKeBhbRvTPt4QUfCbPBU0psx9i4t11e2Cwww6rddU6rddXtgsMMbVbrgMBDqt11e2CQwxtT+xUXNNb+dl3yoKNSqlTgc52zRitR0qbjZjKXh1HVzbzBjK+jV2LVEN7sZQtVdKVRsoCtbZeWEar49Xxc2/xDNH0gV6gqghmvUNiL7Z9Ryk2DcIoc+ZtyjeZpHhsdl/giVKteoSFbexvCq5gwF7MMe2CRoY2oalT7dQnzdYzFh8W4zR+s0a5ttWI9DYK//jNAXgtv3hjdZZPqyH95SUfVn3TQjW9g/W0/ibD7WU36yrTd8mapa8q6PX87IPrx7YJGhjahV1Dj5jFKYBl6lMOfmKppiw4QbPp3fEDNTDH5lhug8RQ/WEU1yjlM4pLmvvlqiBpUphAEvulvDWx4Q5FC3x7YJGhjhhcfM0vxf5fpMerXzMitsMpqgZi80yoniOb5mBlasgORTKS2PiVNyR3RWLU96cZXdwcubYeCiJsPhlsofheNylZLeUE2EOyaW9PxGN7kNDUCOVBsdkH1ZKh2PbZNDzs6vfy23GCgEbKu8DjPDCl3y5io4CDSM3kM0UhDTJ33wSNDHJ2SuKiq5vszSqoso2WHeUrWmmDn/wByvow+w3nM0dcoRv8AFtcjpNLXbc3tffNKof3pvs7TwNIL51P2wYZWYsAtztlKijhr3LfAtNOuwmlC+3PND2/zz+HHMLC37wu+xSu/tK/jlkSqNjSi1AN4IqX2zRGRrqLbcEjQxwRcfMuKag8wJZgGF+MsFAHICEqiqfgSoeN4CVBI5y4UAnjaMQoBPECZsihudo0+0n9M2U0HRYfST+mH0k/pj+klr+2C9JD/ALZcqCRzE8yhrcxMpAK8psRdg5YJGhjahlTrgIYI0HTUqdcDj2wSf//EACQQAAICAQQCAwEBAQAAAAAAAAABESExQVFxsRChYYHB8JHh/9oACAEBAAE/Ier0hPf+CUUK05QgX/Q/h/AlgUFBKwgNV4EtyLfIyi/22QhJ7jWRqkLcrT5Z6r6F9XQnv/BCgSnKEoL/AKCBSwIUbUaiKiXL9IaEZjVyIXMWV/4xKfIl8hAn8dhaiXzEIpC2K2PUfR7C6F9n4NVxEgtOUJSE/wBhaCFMrZCQ2QrSDSyNxtJXjclFduOFtQlTEt8jQT+GwtRPcQikKKW5O10L6ehfd+DVFKkLTlCUSmG4W5qusrD7JIWmFwvFSgyWBBbGgSqoVgQlT5Ft8iYistj7V0aRaiewg1QQ0rci+7o6PR2/weAlISvIlhAz5IQyczfjXlB/kWENnhDF1s/lsNOvTi3yxqpkmkfUrwX2S34VSC1vW0HwVNP7RL03TBDQKWTk7PR1ejsmnAwFryIcY0qmNVJPyhKy0oaX0Nomhf0jFr/kiA+4C5/Y0S5Od8vxlV7GnLYdRqxQ0oTNHjJW5O50dPo75+BKhaciF5bi2Y4pX1jWWYnlDuWgTSr3JTxaEN99tGQmS1uWPYxsy2ThCQx0kLcembi34oFoehEyPBmCVM7fR0+hff44IT3Eoyj5Wt7EViMHwfh9TrYpXTFY4E258xULV/mJNpWoCbEk9z0pqNDKFhnf6On0d7xWEdxgZTHmf0fkhcJGzf2LxmbySI4RWsN9RDRS+AvieYgXxetHqaeNozt9HS6O8IowcmI8b/JXLHzQC37EasBZKefPVdSN5r8Nj/Zk9/xISJypyJpE06exJbKvHrR4H42j5O30dbo7QvF3jzWkjaGgCVlpW6MHHn/3NhY/nrxWOksscxqaGufCVcj1ph5WjO30dXo73itDtEKwM3bQyZqIgay0DJijx92h9/3MQ2rX5+J6PspuHj5cfj+tMDTxtDt9HR6O1+eKwjDyYGwXVpPsauCqVD5pDgzLR5IhNBtmQTkolP4JT8MvxVni9lzG+kxulLEF/ByJgiUN7EUnanaZcQPDHjxlh8nd6Or0d/xwMBghrGPMd3VVm/6PHNyccrxBr6BeieJ6nsTkHJUxt8yaTgoLdC92RfxQsvkZh4mj5Oz0dXo7XjgYOTBGUx5iZoO0Q5Wwf6InQ2XMMkeL6ns9NDH/ANTALXkepo8bQ7fR1ejsmpahqcjUZRyTwN0GpkCqWmUxWxBrDSTpYihjENplLkqhYQ8+EWBvyPy2h2+jp9Hc8cBq8mBk5HCcDUGpieByhBxcCdMbIw5GoLXkY9PEQ7vR1+jsfngnRi5MR7eInAxPYkML9ImGyPwTAauRjwvEWR3Ojr9De388FoNXkYQnuyj5EcZTspfNjSstWmhDwcUlZDBMkONV/bj8WBkShT2KbM61cknl5NIFLdJSMHREQZFOwhqKTVd7SNsvHZ+go6aShyYJ2+KYxAMB4EJjHhecdrob0dDe/wDCbCdIavJiQqadJ8Blkm6NL4C3MTKHwMZCZ2ycRGHH85FccfhD2P8AAGYeMs5T6HXCxrVMmqmuX9nuRm3NNNn6QU6U0pzUiMkjSS3G06oeo3SGBYO10dbo7H4SE6MHI9DibuEFBY4TzAubyBS4OpphEGL8o3qdEyuEwhBJEsBbVmUH+Iy+D4F0RVqRtM2TDwQSpkvczNcS2tR6jwhiWGP7uj2l0h/b+Cum2HnC9jtcDUk9Mtpf0GP4dUn8jFVW0K3gcd292P69cxXgbKDBkJd2Z6ASocdDSthB0altBmJb3QRRylGEh7SWxuBT5eFVDXh4OoVQqkVecRTE3qH3GhCwX/Y+CQSzO0EI/GixNidHY6Y8cy6Q3t/BwiRLLZYflUT1eBEjQIULDAjuxKW9mSOTXupFKbFxJ1H30Kkx+MhUlhC2IbycyjeBo22wp2gRsJLUc/MLuhpadlYS37A/kJlq9CKxNRPhCaS1b43Mgg7c4oUH5EM0MT7CppDEp5sp+SF1ZIvkTHb6Z7S6Q3v/AASonLCShskvoUxKghSSSX/MBM3kcSmVCsEmLVjSYI1iLSzHr+6A2KauNKSQQdrZji7ewWtvXTgVDaCJrAghW8qAytsSqhVITUwxaDnlFOSCTPsIGTohRJUJULDC0LI7fTOh0hvb+CdlOh68oeg3+o9fzoTgb/Yc3viODAa/I1vkbsb+uyGqP7DeSaQ9hNM7fTP/2gAMAwEAAgADAAAAEBNLOAZtaOEKFALOEBBUSqqSoGAICNDDzlpdkUUMHDK5TDsGZj+vMFJLOfJ+TK/0rDAHF0T8wXHXOjPBCLLrSM7hSGLPPKCKLaAtxeEEDANPCZ+m2VvWJDNOOoFSrWk48KPMGrSEWnOojuJzpKnZy2qCJFO0DHPHPAIHPIIIIAP/xAAnEQEAAgIBBAIBBAMAAAAAAAABABEhMUEgUWFxgcGhEDDh8LHR8f/aAAgBAwEBPxDoMSnL5OoHxNpK5/YxBdx+CUy+DiGQQCVVQczN1K3Vd+IN9Qj8KQ0QjJMVyL2/5KAW/wAyim+D7hak9ZbGBaOv4iU10oWZMz2DBv8AmKzeQYwCxi4UUWgf3UKnLXf3DTOzNnp5xFCa/vEKJwhMahhfb3My3IQ0VI2MFBMB/ibXhmz0tHWyDLxj1NliokpDdcTL1JUrTKXTEsDVps9XzqGvjtDBL+H6YaRWgVAEXZZ6qBGsBXJMRFlK/U31jTKdPG7PTF8flHCRG6Wt4l5v9gF1KZ5hZK7kMynqG+ZTyWDdXbzf+opRkODMcK87VaQzj3AqyBeOJafSFYobb9S2qgW44VKg2a1jucMvoRLL/kyxgMp4hzeNX7YIMqY9XiKLL2TzLkV8iPrvHzfftK2BX1mVdraV+O3eX03zqIttN12zX62yYKR1UoEnYb/ENPpFOcmmVarQFvzc3EXBTpCo72jlrmIuwOThuL5m23pUxwqEs928QB7YAXhAq/cfGVTfdvo10+er/8QAJhEBAAICAQMDBAMAAAAAAAAAAQARITFBIFFhMHGBkaHB8RDR8P/aAAgBAgEBPxDo8x0jfY3GMngGPf0figcxxKnfmc6mZoJllpuUuX25id+epdmCWjVe8XJAWIf57yzoHxNgfL+JkAJ3c+s9zN9KARmbqezqNSSQHcJ2lsbXeMBWiO26x4uGk9yGjp4lUFsN7tOdXDuRqukwznJKgRv2+8+9IaOlgm6lzMLcxEY7CUtl1Dn8paPMoSzFXJDR07MwDQ9zcdQ8hMt7y1hZuHi1VFydDZqJmCcV1+I5Kylt8Z+ZXFRcJmDLWFTe/QviWLU3iNirllbl9brEorkG+OIawwEfo4C85L/qG28mErNspc3rHvM5MKnnlceGR53nz0g61i58SkAiwlC1tfO6l5kvnvBLAOQZcqI69oXB+oYqz+oNArICd2VrhiEKbn3j/GETbY+Yq5cYVKJatb8PExQ3quEqYqGiZNjmLtV794TfbjxKkDoa83Mo7j6IsfIjyZuWNPb46Nen/8QAJhABAAIBAgcBAQEBAQEAAAAAAQARITFxQVFhkaGx8IHBENHh8f/aAAgBAQABPxA9yajdlYPT+SgEu+bMtO5/jPp8ox7f8XtjH5tlV+MAoTU02lkfZEogHYJXuYdiZm35m2P+D9TnPhOLCn05Szf9f+BYNn8mDLI3jJ3FLfnoSn8/41hRgXleVasOVNSF+obt7S+AhFf+PyHEvLXVrQZM8SDzP8QyZ9Lknm53nMC9GMXwOc7g+2D5eKHN81mZkXw4TEOv+pF39Pm8iZwABAiIrg0Bsau+JzK7MGxLEqGVNBAA+BL8Lo8tJ3j/ABQixKfno/x/MTE7MYsj5rKtx7gra9ks3/TMd19ouDpLpW2yx4DUSqnBKiiNtvd4naNMxGVtHOJeaHnFlOgaEYz6A02jbzoQys+MyxeC8WVyX8OBAlaqA3haozoBLeKc5mvzTU2ZRzIyvmsq3HuUJ09kPf8ARD+jAXs/4XY8Y41BpsNX+Qfua6Ycniy8F5QrrP1a0tuMi08sQi2EyzNQJOAq/wAdcyv/AABt10yzIdN4ItANq4CO1jXNm6wrSWvFXQ47sPI8awcngnRiIrKRXu4G5FjXNkJMDtBgy5df7gvce54/shvc9EHe/iJcAxmN6JRr9LXVLX9QjgrgOFCgW4kQIl6EcxaC2FqOCxXUgBm1WmNBqSvByxGRUFULerQlkfNP/wBDbEVvOrneDfiOV/JjEKrZT/8AdIC8OIcfsGf420OuH2Q4doNUOT9zO8PcNbXsnmeiHvfxAs6oxd5ZtIggZKlCnwxFGwp9PH8zLalA0Q1E4Q2x67nOVRU/iVRQmlQN9beB5JylAYBl7DwjWxtCr16zqrJZYXrV6xivqDHjCwwGlOMOD5uUfiCxDWx9zuT7h7fshvc9Eq3v4lU7YO9LBsmLfKC96UuSCoOrxOjDS0ClLZQ9cTU0xzlzu4lknGn5uIMU7yoQbU1dP/YoEf0htyid6FPDs4w9UA62FueAWYMXcFDQFzGV1Vz6POC/xEwg7T3BW4+54PsnkeiB0+P8QLdv+QWdkLJ70NfHhBXVgNhQtSGQraP6Ec3bdZeEsC9nK8mZTnZQ8WAIuLxP3hFwnbVVMJ14MRPortVx38QznOTXIhqdJ8HnNOyJhDnFdx9w9v2TyfRPL/ia9k4f2DtJgbwQ1hNX5ux+GZwpE2DgDU3yRKuIAGyeVOe8zXWJQC6ZX4wJbrQAjkRODC1cbROH7H6AEBAOUMElY6JexvA2NfMDM+Dzhy2mATX2e57HueN7IX9fRD3f4mrZNBNDZEao6gbaRuK8zlYBI3Evz+xKFumi7nlTg7w392EoPxWeUwirQA63DtsUnKMorWUtbeMLi4f+J8HnNTaJYTU+az2PueN7J5Honk/xOO2aI0NkodurqIHmMMZLBLK17hgSCqPc8qXbWPn35K6zWtYFWPGI4agbZ57Pm8kdDvVOZNK5RzsmTbjOtwOGL4eM1NoxrfNYat33F2vZPN9E8mHDb/k8RGliOGKo1jmD+xtFREsEQg/kwIHToPJJuWRsWpwABeJEUwZHBHpMOQLaqGC1nlMATYN9a1TTr/7FMi23K4NhmKrNQrY7ykH9IJz6M7xhUbArW3AQd/XdFeAvNTxJoTXnyHueL7J5HomW5/EHxmhPOI9T/KVhr/4IedsMBep6Sr8KhNXQyeusGq135S6NS7OfyBLrc55bPv8AJLt8w3WJllO9k6uP7UrJcK4RQ7AYhwRYEUOdRRaHZmAmtJ5nueD7I+56I6Pr/EWnbFjHW0iku4xav2iYDaEQAmEc4hbgtwk+Mky8rgUd/wCQhFLaPM5z8VsO1/FHqbTtGWkZ6dTpglLtIsydGyKyFnN5HV9zPa9kff8ARH3P4l9mYEo2kuO0feZQfWhPAlW5Ox5jejAwnJGDJy7bfQdTzGolAMhzvSv2PWSPBtS2q7V+wClVBUWUfw5EchgtdosEecXlu+4+37I63fRHW7/EHO2LGVbCPCPD1TD8aEPFO7yrbmTbPyagVBzOMQzZcSz9xWiXfi8H+Ur11Gl2Y8Q8vusdp6vueD7Jrevoiv5awNfiYkXYe47O8s3blxTL1dCdTpfCDQoZ4xBUTHGBFLVmO0t42lVASXFqq3OhM2ZdxVC7r0R8fviKTw7McH8dY+4+543sjrd9E+Jzhcw8RxLg9zEhGmpBEyB1K03gm4A4QaVDe2IRZRwozunOSIdUuNGbbzfWLthqBVY8khal6oEUEyrl0jOgAtk41V49ZYk4BBFCgBRpwiqK63tEppe0NN1fOXcTHLRX50izgcWFuXWRsht1xANALecCe2O0IeomnZjg8/usWW77ngeyVB19c7R7R4P8/wADoWHuIQaxdBHo2tt6LUtbBETRQDK7QHiEOFC7pwZwvtAOmjG6WuNGgPYLc4XJYV4BevZgrDY0naDQtXXf7M0UIG6WA65RRV0Bb1sGZTWIx4AA2uvsihmIbwPxpNZzDLWbjktD0idrM1Ni6iyy4sbH/Ap++MdPd9x9v2R8Tj6Y43p/kNNI5iydEoDfUmqIQjX/ACan5+QoqrWtXScDALXscJa0kxdUzDkdUQtsGix+dzmXTPGaF2LLrvMPvCKGeWkeT9JadeeDVgGCADHMyoYM07nTqOpEWWMYKWXVzzh4vgiANjl4VAG5mS+TLmLHNTHD4esXcfcuHp7I5N3qTgYWkJpDvLVTKXVteBLOQXYS65gv6YNyEr0gXOCOAe0t3UjcGqACUlF46X5iSAnyha3gFRWRhqAGm0Z7GRxGng6rvGHf9WA42eekB0JSCxxGyqzmpKo/Y53BYNavBKb5e/ZzQDgEuiZXrG0QCdEanMvPKVIh2dtVvK6vpM5+RNwKpyDScqpPBd9XSMl4gmejmWcpcMilJwXnjjMnFZcfsV7MWJxu9ySm1TAY5sPVjeQcgYeGhtqAD8e0TZpws2t/+xVJ0Cx1mvxhrIuDBcPJaDaSRtnlHQpFeo1Gqq2DiZesUlt+igLeKBRMwMheeHdUBrbXCanrMuqKh5NQB2lU6c4jJihYdTA+C4XHTkF5ZjxFVRdPixGFVUDkAf8AEPYB+KNtvbjH6TD2MDGM5NISCm20NBdONSjlKlYnbU58g1WYXSxRRr/Ya3mr5jvYiWGN3KVfSiRNxif8wEfoQRYSuL507syVbQbgCW7UmMuVhDhJl1ylGL5ZZnEgalzF0jg3ZRuPGHAjiNymsJ0WQk08auAPHoQsccpVcTdNfXpDkAskrUaNJrTRUNnJxpGogwhW8sVHyTsUtZRUEFAC1rlpNGFELYukFX8sybWTMggdpyrSB59FRq4YxHfAy4/YuxM63Zu8y7QTFdZUv1co3Z+Ap93lBhnylQ/MSzNwZ9DkzuR6lEl0SE2TOI8cO4ywhQbGM9Hx1hTcfcd7U3//2Q==" alt="CIM Tools Private Limited logo" class="client-logo">
+          </div>
+          <div class="client-body">
+            <div class="client-badge">Loyal Partner · 20+ Years</div>
+            <div class="client-name">CIM Tools Pvt. Ltd.</div>
+            <p class="client-desc">
+              CIM Tools Pvt. Ltd. has relied on S.S. Enterprises as their go-to precision tooling partner for more than two decades. Our consistent quality standards, rapid turnaround on EDM job work, and in-depth understanding of their engineering requirements have forged a bond that goes beyond vendor and client.
+            </p>
+            <div class="client-pillars">
+              <span class="client-pillar">🔁 Repeat Partner</span>
+              <span class="client-pillar">⚡ EDM Specialists</span>
+              <span class="client-pillar">📅 20+ Years</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="slider-dots">
+      <button class="dot active" onclick="goToSlide(0)" aria-label="Taratec"></button>
+      <button class="dot" onclick="goToSlide(1)" aria-label="CIM Tools"></button>
+    </div>
+
+    <button class="slider-arrow prev" onclick="changeSlide(-1)" aria-label="Previous">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 4l-6 6 6 6"/></svg>
+    </button>
+    <button class="slider-arrow next" onclick="changeSlide(1)" aria-label="Next">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 4l6 6-6 6"/></svg>
+    </button>
+  </div>
+
+  <div class="trust-strip fade-up">
+    <div class="trust-item"><span class="trust-icon">🏆</span><span>Industry-Proven Quality</span></div>
+    <div class="trust-divider"></div>
+    <div class="trust-item"><span class="trust-icon">🤝</span><span>20+ Year Partnerships</span></div>
+    <div class="trust-divider"></div>
+    <div class="trust-item"><span class="trust-icon">🔒</span><span>Consistent On-Time Delivery</span></div>
+    <div class="trust-divider"></div>
+    <div class="trust-item"><span class="trust-icon">⭐</span><span>Zero Compromise on Precision</span></div>
+  </div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="section-eyebrow">Get In Touch</div>
+  <h2 class="section-title">CONTACT US</h2>
+  <div class="section-rule"></div>
+  <div class="contact-inner">
+    <div class="contact-info fade-up">
+      <p>
+        Ready to discuss your tooling requirements? Our team is available to consult on any project — from quick job-work enquiries to complex mould design briefs.
+      </p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-text">S.S. Enterprises, Bengaluru, Karnataka, India</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🏭</div>
+          <div>
+            <div class="contact-item-label">Specialisation</div>
+            <div class="contact-item-text">Moulds · Dies · Jigs · Fixtures · EDM Job Work</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">⏱️</div>
+          <div>
+            <div class="contact-item-label">Working Hours</div>
+            <div class="contact-item-text">Monday – Saturday, 9:00 AM – 6:00 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form fade-up" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Full name" required>
+        </div>
+        <div class="form-group">
+          <label>Company</label>
+          <input type="text" placeholder="Your company">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+91 XXXXX XXXXX">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@company.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Service Required</label>
+        <select>
+          <option value="">Select a service…</option>
+          <option>Mould Design & Manufacturing</option>
+          <option>Die Manufacturing</option>
+          <option>Jigs & Fixtures</option>
+          <option>Spark EDM Job Work</option>
+          <option>Wire EDM Job Work</option>
+          <option>Multiple / General Inquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Project Details</label>
+        <textarea placeholder="Describe your requirement — material, dimensions, quantity, timeline…"></textarea>
+      </div>
+      <button type="submit" class="btn-submit">
+        Send Enquiry
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">S.S.<span>Enterprises</span></div>
+    <div class="footer-tagline">Precision Tooling · EDM Specialists · Bengaluru</div>
+  </div>
+  <div class="footer-copy">© 2025 S.S. Enterprises. All rights reserved.</div>
+</footer>
+
+<script>
+  // Scroll animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Stagger children in grids
+  document.querySelectorAll('.services-grid .service-card, .team-grid .team-card, .why-features .why-feature').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.08}s`;
+  });
+
+
+  // Clients Slider
+  let currentSlide = 0;
+  const totalSlides = 2;
+
+  function goToSlide(index) {
+    document.querySelectorAll('.client-slide').forEach((s, i) => {
+      s.classList.toggle('active', i === index);
+    });
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === index);
+    });
+    currentSlide = index;
+  }
+
+  function changeSlide(dir) {
+    let next = (currentSlide + dir + totalSlides) % totalSlides;
+    goToSlide(next);
+  }
+
+  // Auto-advance every 5s
+  setInterval(() => changeSlide(1), 5000);
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = '✓ Enquiry Sent!';
+    btn.style.background = '#22c55e';
+    setTimeout(() => {
+      btn.innerHTML = 'Send Enquiry <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+<script src="https://bizmorph-api.onrender.com/widget.js" data-bot="test"></script>
+</body>
+</html>
